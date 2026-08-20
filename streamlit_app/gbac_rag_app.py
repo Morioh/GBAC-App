@@ -369,7 +369,7 @@ def get_all_sections(rag_db: RAGDatabase) -> List[str]:
 def load_system():
     """Auto-load database from ./chroma_db. Returns (rag_db, retriever) or (None, None)."""
     try:
-        db_path = "./chroma_db"
+        db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db")
         if not os.path.exists(db_path):
             return None, None
         rag_db = RAGDatabase(persist_directory=db_path)
