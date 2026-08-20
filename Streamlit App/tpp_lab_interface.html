@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      TPP Labs — Policy Intelligence | McCourt School of Public Policy
+    </title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --gu-navy: #041e42;
+        --gu-navy-deep: #021431;
+        --gu-navy-light: #0a3068;
+        --gu-blue: #1a4a8a;
+        --gu-blue-accent: #3d7bd9;
+        --gu-blue-pale: #e8eff8;
+        --gu-blue-tint: #f3f6fb;
+        --gu-gray-100: #f7f8fa;
+        --gu-gray-200: #ebedf2;
+        --gu-gray-400: #9aa3b1;
+        --gu-gray-600: #5a6475;
+        --gu-gray-800: #2d333f;
+        --gu-gold: #b4975a;
+        --gu-gold-light: #d4bc82;
+        --gu-white: #ffffff;
+        --gu-text: #1c2030;
+        --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+        --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--gu-white);
+        color: var(--gu-text);
+      }
+
+      /* ══════════════════════════════════════════
+         GEORGETOWN McCOURT HEADER
+      ══════════════════════════════════════════ */
+
+      /* Top utility bar */
+      .gu-utility-bar {
+        background: var(--gu-navy-deep);
+        padding: 0 32px;
+      }
+      .gu-utility-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0;
+      }
+      .gu-utility-inner a {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        letter-spacing: 0.3px;
+        transition: color 0.15s;
+      }
+      .gu-utility-inner a:hover {
+        color: #fff;
+      }
+
+      .gu-header {
+        background: var(--gu-white);
+        position: sticky;
+        top: 0;
+        z-index: 300;
+        box-shadow: 0 1px 8px rgba(4, 30, 66, 0.08);
+      }
+
+      /* Logo row */
+      .gu-logo-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 32px;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .gu-logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        gap: 14px;
+      }
+
+      .gu-logo-mark {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .gu-logo-shield {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+      }
+
+      .gu-logo-text {
+        line-height: 1.15;
+      }
+      .gu-logo-text .school-name {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--gu-navy);
+        display: block;
+        letter-spacing: -0.2px;
+      }
+      .gu-logo-text .program-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gu-gray-600);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 2px;
+      }
+
+      .hamburger-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        color: var(--gu-navy);
+        font-size: 24px;
+      }
+
+      /* Primary nav bar */
+      .gu-nav-bar {
+        background: var(--gu-navy);
+      }
+
+      .gu-nav-list {
+        list-style: none;
+        display: flex;
+        align-items: stretch;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        gap: 0;
+      }
+
+      .gu-nav-list > li {
+        position: relative;
+      }
+
+      .gu-nav-list > li > a {
+        display: block;
+        padding: 13px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        transition:
+          color 0.15s,
+          border-color 0.15s,
+          background 0.15s;
+        line-height: 1.4;
+        letter-spacing: 0.2px;
+      }
+
+      .gu-nav-list > li:hover > a,
+      .gu-nav-list > li > a:focus {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.08);
+        border-bottom-color: var(--gu-gold);
+      }
+
+      /* Dropdown panel */
+      .nav-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 260px;
+        background: #fff;
+        border: 1px solid var(--gu-gray-200);
+        border-top: 3px solid var(--gu-navy);
+        box-shadow: 0 8px 24px rgba(4, 30, 66, 0.14);
+        z-index: 400;
+      }
+
+      .gu-nav-list > li:hover .nav-dropdown,
+      .gu-nav-list > li:focus-within .nav-dropdown {
+        display: block;
+      }
+
+      .nav-dropdown a {
+        display: block;
+        padding: 10px 20px;
+        font-size: 13.5px;
+        font-weight: 400;
+        color: var(--gu-gray-800);
+        text-decoration: none;
+        border-bottom: 1px solid var(--gu-gray-100);
+        transition:
+          background 0.1s,
+          color 0.1s;
+      }
+      .nav-dropdown a:last-child {
+        border-bottom: none;
+      }
+      .nav-dropdown a:hover {
+        background: var(--gu-blue-tint);
+        color: var(--gu-navy);
+      }
+
+      /* ══════════════════════════════════════════
+         HERO BAND — Georgetown Navy
+      ══════════════════════════════════════════ */
+      .hero-band {
+        background: linear-gradient(
+          170deg,
+          var(--gu-navy) 0%,
+          var(--gu-navy-deep) 100%
+        );
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle pattern overlay */
+      .hero-band::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(180, 151, 90, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 20% 80%,
+            rgba(61, 123, 217, 0.06) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      /* Breadcrumb strip */
+      .hero-breadcrumb {
+        position: relative;
+        padding: 12px 32px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .hero-breadcrumb a {
+        color: rgba(255, 255, 255, 0.55);
+        text-decoration: none;
+        transition: color 0.12s;
+      }
+      .hero-breadcrumb a:hover {
+        color: #fff;
+      }
+      .hero-breadcrumb .sep {
+        margin: 0 8px;
+        opacity: 0.4;
+      }
+
+      /* Hero content area */
+      .hero-content {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 52px 32px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .hero-page-title {
+        font-family: var(--font-display);
+        font-size: 40px;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.15;
+        margin-bottom: 14px;
+        letter-spacing: -0.3px;
+      }
+
+      .hero-subtitle {
+        font-size: 17px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.68);
+        margin-bottom: 26px;
+        max-width: 640px;
+        line-height: 1.6;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: rgba(180, 151, 90, 0.15);
+        border: 1px solid rgba(180, 151, 90, 0.35);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gu-gold-light);
+        margin-bottom: 30px;
+        letter-spacing: 0.5px;
+      }
+
+      /* App tabs inside hero */
+      .hero-tabs {
+        display: flex;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 4px;
+        border-radius: 10px;
+      }
+      .hero-tab {
+        padding: 8px 24px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.55);
+        transition: all 0.2s;
+        user-select: none;
+      }
+      .hero-tab.active {
+        background: rgba(180, 151, 90, 0.22);
+        color: var(--gu-gold-light);
+      }
+      .hero-tab:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+      }
+
+      /* ══════════════════════════════════════════
+         WHITE BODY CONTENT
+      ══════════════════════════════════════════ */
+      .page-body {
+        background: var(--gu-white);
+        padding: 52px 32px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .body-heading {
+        width: 100%;
+        max-width: 720px;
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--gu-text);
+        margin-bottom: 16px;
+        text-align: left;
+      }
+      .body-heading span {
+        display: inline-block;
+        background: var(--gu-blue-pale);
+        border: 1px solid #c4d4eb;
+        border-radius: 5px;
+        font-family: var(--font-body);
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--gu-navy);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+
+      /* Search / input bar */
+      .input-container {
+        width: 100%;
+        max-width: 680px;
+        margin-bottom: 34px;
+      }
+
+      .input-wrapper {
+        background: var(--gu-gray-100);
+        border: 1.5px solid var(--gu-gray-200);
+        border-radius: 14px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.25s;
+        box-shadow: 0 1px 4px rgba(4, 30, 66, 0.04);
+      }
+      .input-wrapper:hover {
+        border-color: var(--gu-blue-accent);
+        box-shadow: 0 2px 14px rgba(4, 30, 66, 0.09);
+      }
+      .input-wrapper:focus-within {
+        border-color: var(--gu-navy);
+        box-shadow: 0 2px 18px rgba(4, 30, 66, 0.13);
+        background: #fff;
+      }
+
+      .add-btn {
+        width: 34px;
+        height: 34px;
+        background: var(--gu-blue-pale);
+        border: 1px solid #c4d4eb;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 22px;
+        color: var(--gu-navy);
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .add-btn:hover {
+        background: #d0ddef;
+        transform: scale(1.05);
+      }
+
+      input[type="text"] {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--gu-text);
+        font-size: 15px;
+        font-family: inherit;
+      }
+      input[type="text"]::placeholder {
+        color: var(--gu-gray-400);
+      }
+
+      .model-sel {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        background: var(--gu-blue-pale);
+        border: 1px solid #c4d4eb;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--gu-navy);
+        transition: all 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .model-sel:hover {
+        background: #d0ddef;
+      }
+
+      .send-btn {
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(135deg, var(--gu-navy), var(--gu-blue));
+        border: none;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .send-btn:hover {
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(4, 30, 66, 0.3);
+      }
+
+      /* Quick action chips */
+      .quick-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 44px;
+      }
+      .action-chip {
+        padding: 9px 18px;
+        background: var(--gu-gray-100);
+        border: 1.5px solid var(--gu-gray-200);
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 13.5px;
+        color: var(--gu-gray-800);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.2s;
+      }
+      .action-chip:hover {
+        background: var(--gu-blue-pale);
+        border-color: var(--gu-blue-accent);
+        color: var(--gu-navy);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(4, 30, 66, 0.1);
+      }
+
+      /* Section heading */
+      .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gu-gray-400);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+        text-align: center;
+      }
+
+      /* Cards grid */
+      .project-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 900px;
+      }
+      .project-card {
+        background: var(--gu-white);
+        border: 1.5px solid var(--gu-gray-200);
+        border-radius: 12px;
+        padding: 26px;
+        cursor: pointer;
+        transition: all 0.25s;
+        box-shadow: 0 1px 4px rgba(4, 30, 66, 0.04);
+      }
+      .project-card:hover {
+        border-color: var(--gu-blue-accent);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 28px rgba(4, 30, 66, 0.12);
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--gu-blue-pale);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+      .card-title {
+        font-family: var(--font-display);
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--gu-navy);
+        margin-bottom: 8px;
+      }
+      .card-desc {
+        font-size: 13.5px;
+        color: var(--gu-gray-600);
+        line-height: 1.6;
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .page-body > * {
+        animation: fadeUp 0.55s ease-out both;
+      }
+      .input-container {
+        animation-delay: 0.05s;
+      }
+      .quick-actions {
+        animation-delay: 0.12s;
+      }
+      .section-label {
+        animation-delay: 0.18s;
+      }
+      .project-cards {
+        animation-delay: 0.24s;
+      }
+
+      /* ══════════════════════════════════════════
+         McCOURT / GEORGETOWN FOOTER
+      ══════════════════════════════════════════ */
+
+      .gu-footer {
+        background: var(--gu-navy-deep);
+        color: #fff;
+        padding: 0;
+      }
+
+      .footer-main {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 52px 32px 40px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 48px;
+      }
+
+      .footer-brand .footer-logo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        margin-bottom: 20px;
+      }
+      .footer-brand .footer-shield {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+      }
+      .footer-brand .footer-logo-text {
+        line-height: 1.2;
+      }
+      .footer-brand .footer-school {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        display: block;
+      }
+      .footer-brand .footer-program {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gu-gold-light);
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 2px;
+      }
+
+      .footer-brand p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+        margin-bottom: 20px;
+        max-width: 340px;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 12px;
+      }
+      .footer-social a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        transition: background 0.2s;
+      }
+      .footer-social a:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+      .footer-social a svg {
+        width: 18px;
+        height: 18px;
+        fill: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-col h4 {
+        font-family: var(--font-display);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gu-gold-light);
+        margin-bottom: 18px;
+        letter-spacing: 0.3px;
+      }
+      .footer-col a {
+        display: block;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        line-height: 2;
+        transition: color 0.15s;
+      }
+      .footer-col a:hover {
+        color: #fff;
+      }
+      .footer-col p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.8;
+      }
+
+      .footer-divider {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 0;
+      }
+
+      .footer-bottom {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 20px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0;
+      }
+      .footer-legal a {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        padding: 0 16px;
+        transition: color 0.15s;
+        line-height: 1.5;
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .footer-legal a:last-child {
+        border-right: none;
+      }
+      .footer-legal a:first-child {
+        padding-left: 0;
+      }
+      .footer-legal a:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .footer-copy {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 960px) {
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 640px) {
+        .gu-nav-list {
+          display: none;
+        }
+        .hamburger-btn {
+          display: block;
+        }
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding: 36px 24px 28px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px 24px;
+        }
+        .hero-page-title {
+          font-size: 28px;
+        }
+        .hero-content {
+          padding: 36px 24px 44px;
+        }
+        .gu-logo-bar {
+          padding: 12px 16px;
+        }
+        .page-body {
+          padding: 36px 20px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════
+       GEORGETOWN UTILITY BAR
+    ══════════════════════════════════════ -->
+    <div class="gu-utility-bar">
+      <div class="gu-utility-inner">
+        <a href="https://mccourt.georgetown.edu/news/">News</a>
+        <a href="https://mccourt.georgetown.edu/about-us/">About Us</a>
+        <a href="https://gradapply.georgetown.edu/apply/">Apply Now</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+       McCOURT HEADER
+    ══════════════════════════════════════ -->
+    <header class="gu-header">
+      <!-- Logo row -->
+      <div class="gu-logo-bar">
+        <a
+          class="gu-logo-link"
+          href="https://mccourt.georgetown.edu/tech-and-public-policy/"
+          aria-label="McCourt School — Tech &amp; Public Policy"
+        >
+          <div class="gu-logo-mark">
+            <!-- Georgetown shield SVG -->
+            <svg
+              class="gu-logo-shield"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="2" y="2" width="44" height="44" rx="6" fill="#041E42" />
+              <path
+                d="M24 8L14 14V28C14 34 18 39 24 41C30 39 34 34 34 28V14L24 8Z"
+                fill="none"
+                stroke="#b4975a"
+                stroke-width="1.8"
+              />
+              <path
+                d="M24 13L17 17.5V28C17 32.5 20 36 24 37.5C28 36 31 32.5 31 28V17.5L24 13Z"
+                fill="rgba(180,151,90,0.15)"
+              />
+              <text
+                x="24"
+                y="29"
+                text-anchor="middle"
+                font-family="Georgia, serif"
+                font-size="14"
+                font-weight="bold"
+                fill="#b4975a"
+              >
+                G
+              </text>
+            </svg>
+            <span class="gu-logo-text">
+              <span class="school-name">McCourt School of Public Policy</span>
+              <span class="program-name">Tech &amp; Public Policy</span>
+            </span>
+          </div>
+        </a>
+
+        <button class="hamburger-btn" aria-label="Toggle menu">☰</button>
+      </div>
+
+      <!-- Primary navigation -->
+      <nav class="gu-nav-bar" aria-label="TPP main navigation">
+        <ul class="gu-nav-list">
+          <li>
+            <a href="https://mccourt.georgetown.edu/tech-and-public-policy/"
+              >TPP Home</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="https://mccourt.georgetown.edu/tech-and-public-policy/about-us-2/"
+              >About</a
+            >
+            <div class="nav-dropdown">
+              <a href="https://mccourt.georgetown.edu/about-us/mission/"
+                >Our Mission</a
+              >
+              <a href="https://mccourt.georgetown.edu/people/faculty/"
+                >Faculty &amp; Researchers</a
+              >
+              <a href="https://mccourt.georgetown.edu/people/visiting-fellows/"
+                >Visiting Fellows</a
+              >
+              <a href="https://mccourt.georgetown.edu/people/leadership-team/"
+                >Leadership Team</a
+              >
+            </div>
+          </li>
+
+          <li>
+            <a
+              href="https://mccourt.georgetown.edu/tech-and-public-policy/our-work/"
+              >Our Work</a
+            >
+            <div class="nav-dropdown">
+              <a href="https://mccourt.georgetown.edu/research/">Research</a>
+              <a href="https://mccourt.georgetown.edu/research/mccourt-centers/"
+                >Centers &amp; Initiatives</a
+              >
+              <a
+                href="https://mccourt.georgetown.edu/research/featured-publications/"
+                >Publications</a
+              >
+            </div>
+          </li>
+
+          <li>
+            <a href="https://mccourt.georgetown.edu/programs/">Programs</a>
+            <div class="nav-dropdown">
+              <a href="https://mccourt.georgetown.edu/programs/degree-programs/"
+                >Graduate Programs</a
+              >
+              <a
+                href="https://mccourt.georgetown.edu/programs/certificate-programs/"
+                >Certificates</a
+              >
+              <a href="https://mccourt.georgetown.edu/executive-education/"
+                >Executive Education</a
+              >
+            </div>
+          </li>
+
+          <li>
+            <a
+              href="https://mccourt.georgetown.edu/news/tag/tech-public-policy/"
+              >News</a
+            >
+          </li>
+
+          <li>
+            <a href="https://events.georgetown.edu/tech-public-policy"
+              >Events</a
+            >
+          </li>
+
+          <li>
+            <a href="https://mccourt.georgetown.edu/life-at-mccourt/"
+              >Life at McCourt</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ══════════════════════════════════════
+       HERO BAND — Georgetown Navy
+    ══════════════════════════════════════ -->
+    <section class="hero-band">
+      <!-- Breadcrumb -->
+      <div class="hero-breadcrumb">
+        <a href="https://mccourt.georgetown.edu">McCourt School</a>
+        <span class="sep">›</span>
+        <a href="https://mccourt.georgetown.edu/tech-and-public-policy/"
+          >Tech &amp; Public Policy</a
+        >
+        <span class="sep">›</span>
+        TPP Labs
+      </div>
+
+      <!-- Title + subtitle + tabs -->
+      <div class="hero-content">
+        <h1 class="hero-page-title">
+          TPP Labs — Experiments in Policy Intelligence
+        </h1>
+        <p class="hero-subtitle">
+          Powered by the McCourt School's Tech &amp; Public Policy Lab for
+          experimental use only <br />AI-assisted research and policy analysis
+          for the public good
+        </p>
+        <span class="hero-badge">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          TPP Labs | McCourt School of Public Policy
+        </span>
+
+        <!-- Tabs -->
+        <div class="hero-tabs">
+          <div class="hero-tab active">Chat</div>
+          <div class="hero-tab">Analysis</div>
+          <div class="hero-tab">Documents</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+       WHITE BODY — input, actions, cards
+    ══════════════════════════════════════ -->
+    <main class="page-body">
+      <div class="body-heading">
+        Ask TPP Labs Intelligence
+        <span>AI-Powered</span>
+      </div>
+
+      <!-- Search bar -->
+      <div class="input-container">
+        <div class="input-wrapper">
+          <div class="add-btn">+</div>
+          <input
+            type="text"
+            placeholder="Ask about tech policy, AI governance, digital regulation, or public interest technology…"
+          />
+          <div class="model-sel">
+            TPP 4.5 <span style="font-size: 11px; margin-left: 2px">▼</span>
+          </div>
+          <div class="send-btn">↑</div>
+        </div>
+      </div>
+
+      <!-- Quick action chips -->
+      <div class="quick-actions">
+        <div class="action-chip"><span>📋</span> Analyze Documents</div>
+        <div class="action-chip"><span>📊</span> Policy Research</div>
+        <div class="action-chip"><span>💡</span> Best Practices</div>
+        <div class="action-chip"><span>🎯</span> TPP Insights</div>
+      </div>
+
+      <div class="section-label">Get started with TPP Labs resources</div>
+
+      <!-- Resource cards -->
+      <div class="project-cards">
+        <div class="project-card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">Policy Analysis</div>
+          <div class="card-desc">
+            Review and analyze technology policy research, regulatory
+            frameworks, and legislative developments
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="card-icon">🔍</div>
+          <div class="card-title">AI Governance Research</div>
+          <div class="card-desc">
+            Search through AI safety standards, algorithmic accountability
+            guidelines, and governance frameworks
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="card-icon">📈</div>
+          <div class="card-title">Data Projects</div>
+          <div class="card-desc">
+            Build predictive models and analysis pipelines for public interest
+            technology research
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ══════════════════════════════════════
+       McCOURT / GEORGETOWN FOOTER
+    ══════════════════════════════════════ -->
+    <footer class="gu-footer" role="contentinfo">
+      <div class="footer-main">
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <a class="footer-logo-link" href="https://mccourt.georgetown.edu">
+            <svg
+              class="footer-shield"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="2"
+                width="44"
+                height="44"
+                rx="6"
+                fill="rgba(255,255,255,0.08)"
+              />
+              <path
+                d="M24 8L14 14V28C14 34 18 39 24 41C30 39 34 34 34 28V14L24 8Z"
+                fill="none"
+                stroke="rgba(180,151,90,0.6)"
+                stroke-width="1.8"
+              />
+              <text
+                x="24"
+                y="29"
+                text-anchor="middle"
+                font-family="Georgia, serif"
+                font-size="14"
+                font-weight="bold"
+                fill="rgba(180,151,90,0.7)"
+              >
+                G
+              </text>
+            </svg>
+            <span class="footer-logo-text">
+              <span class="footer-school">McCourt School of Public Policy</span>
+              <span class="footer-program">Tech &amp; Public Policy</span>
+            </span>
+          </a>
+          <p>
+            The TPP program at the McCourt School works to shape technology's
+            promise for a better world through cross-disciplinary research,
+            emerging leaders, and policy innovation.
+          </p>
+          <div class="footer-social">
+            <!-- Facebook -->
+            <a href="https://facebook.com/McCourtSchool" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
+            </a>
+            <!-- X -->
+            <a href="https://x.com/mccourtschool" aria-label="X">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.738l7.73-8.835L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                />
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a
+              href="https://instagram.com/georgetownmccourtschool/"
+              aria-label="Instagram"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="rgba(255,255,255,0.8)"
+                stroke-width="2"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="1.5"
+                  fill="rgba(255,255,255,0.8)"
+                  stroke="none"
+                />
+              </svg>
+            </a>
+            <!-- YouTube -->
+            <a
+              href="https://youtube.com/channel/UC9Wg-iqnzUtwcp96e_dgbEg"
+              aria-label="YouTube"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.97A29.94 29.94 0 001 12a29.94 29.94 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.97A29.94 29.94 0 0023 12a29.94 29.94 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a
+            href="https://mccourt.georgetown.edu/tech-and-public-policy/about-us-2/"
+            >About TPP</a
+          >
+          <a
+            href="https://mccourt.georgetown.edu/tech-and-public-policy/our-work/"
+            >Our Work</a
+          >
+          <a href="https://mccourt.georgetown.edu/programs/">Programs</a>
+          <a href="https://mccourt.georgetown.edu/research/">Research</a>
+          <a href="https://mccourt.georgetown.edu/news/tag/tech-public-policy/"
+            >TPP News</a
+          >
+          <a href="https://events.georgetown.edu/tech-public-policy">Events</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>McCourt School of Public Policy</p>
+          <p>Georgetown University</p>
+          <p>125 E St. NW</p>
+          <p>Washington, DC 20001</p>
+          <p style="margin-top: 10px">
+            <a href="tel:202-687-5932" style="display: inline"
+              >P. (202) 687-5932</a
+            >
+          </p>
+          <p style="margin-top: 4px">
+            <a
+              href="https://lp.constantcontactpages.com/su/1O5O5A8/McCourtTPP"
+              style="display: inline"
+              >Join Our Mailing List</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <hr class="footer-divider" />
+
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <a href="https://www.georgetown.edu/privacy-policy/"
+            >Privacy Policy</a
+          >
+          <a href="https://www.library.georgetown.edu/copyright">Copyright</a>
+          <a href="https://accessibility.georgetown.edu/">Accessibility</a>
+          <a href="https://ideaa.georgetown.edu/notice-of-non-discrimination/"
+            >Notice of Non-Discrimination</a
+          >
+        </div>
+        <span class="footer-copy"
+          >© 2026 McCourt School of Public Policy, Georgetown University</span
+        >
+      </div>
+    </footer>
+
+    <script>
+      // Input interactions
+      const inp = document.querySelector("input[type=text]");
+      inp.addEventListener(
+        "focus",
+        () => (inp.parentElement.style.transform = "scale(1.01)"),
+      );
+      inp.addEventListener(
+        "blur",
+        () => (inp.parentElement.style.transform = "scale(1)"),
+      );
+      inp.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && inp.value.trim())
+          document.querySelector(".send-btn").click();
+      });
+      document.querySelector(".send-btn").addEventListener("click", () => {
+        if (inp.value.trim()) alert("Query submitted: " + inp.value);
+      });
+      document.querySelectorAll(".action-chip").forEach((b) =>
+        b.addEventListener("click", () => {
+          inp.value = "Help me with " + b.textContent.trim();
+          inp.focus();
+        }),
+      );
+      document.querySelectorAll(".project-card").forEach((c) =>
+        c.addEventListener("click", () => {
+          inp.value =
+            "Start a " +
+            c.querySelector(".card-title").textContent +
+            " session";
+          inp.focus();
+        }),
+      );
+      // Tab switching
+      document.querySelectorAll(".hero-tab").forEach((tab) =>
+        tab.addEventListener("click", function () {
+          document
+            .querySelectorAll(".hero-tab")
+            .forEach((t) => t.classList.remove("active"));
+          this.classList.add("active");
+        }),
+      );
+    </script>
+  </body>
+</html>

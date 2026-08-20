@@ -1,0 +1,26 @@
+# Re-include the vector DB (root .gitignore ignores chroma_db/ repo-wide)
+!chroma_db/
+
+# Secrets
+.env
+
+# Virtual environment
+venv/
+
+# Large generated/processed data
+processed_chunks.json
+gbac_chunks.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS
+.DS_Store
