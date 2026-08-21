@@ -424,7 +424,7 @@ def render_sources_html(sources: List[Dict]) -> str:
 
 CUSTOM_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 /* ── Hide Streamlit chrome ── */
 #MainMenu, footer[data-testid="stFooter"],
@@ -433,13 +433,31 @@ div[data-testid="stStatusWidget"], .stDeployButton,
 section[data-testid="stSidebar"],
 header[data-testid="stHeader"] { display: none !important; }
 
-/* ── Full-width, zero-padding main container ── */
-.main .block-container {
+/* ── Full-width, zero-padding main container ──
+   Streamlit has renamed these wrapper elements across versions
+   (.main was dropped in favor of data-testid attributes), so every
+   known selector is targeted to stay robust regardless of version. */
+.block-container,
+.main .block-container,
+div[data-testid="stMainBlockContainer"] {
     padding: 0 !important;
     max-width: 100% !important;
     margin: 0 !important;
+    width: 100% !important;
+}
+div[data-testid="stMain"],
+section[data-testid="stMain"],
+div[data-testid="stAppViewContainer"] {
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 .stApp, body {
+    max-width: 100% !important;
     font-family: "Source Sans 3", "Segoe UI", sans-serif;
     background: #fff;
     color: #1c2030;
@@ -505,18 +523,20 @@ div[data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
 }
 .gu-logo-text .school-name {
     font-family: var(--font-disp);
-    font-size: 17px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--gu-navy);
     display: block;
     letter-spacing: -0.2px;
 }
 .gu-logo-text .prog-name {
-    font-size: 11px;
-    font-weight: 600;
+    font-family: var(--font-disp);
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
     color: var(--gu-gray-600);
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     display: block;
     margin-top: 2px;
 }
@@ -532,9 +552,10 @@ div[data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
 }
 .gu-nav-list > li > a {
     display: block;
-    padding: 12px 18px;
-    font-size: 13.5px;
-    font-weight: 500;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
     color: rgba(255,255,255,0.82);
     text-decoration: none;
     border-bottom: 3px solid transparent;
@@ -577,10 +598,11 @@ div[data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
 .hero-title {
     position: relative;
     font-family: var(--font-disp);
-    font-size: 38px;
-    font-weight: 700;
+    font-size: 58px;
+    font-weight: 400;
+    font-style: italic;
     color: #fff !important;
-    line-height: 1.15;
+    line-height: 1.1;
     margin-bottom: 12px;
     letter-spacing: -0.3px;
 }
@@ -1094,7 +1116,7 @@ div[data-testid="stButton"] > button:hover {
 }
 @media (max-width: 768px) {
     .gu-hero { padding: 36px 20px 40px; }
-    .hero-title { font-size: 26px; }
+    .hero-title { font-size: 38px; }
     .body-wrap { padding: 18px 20px 60px; }
     .cards-grid { grid-template-columns: 1fr; }
     .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 32px 20px 24px; }
